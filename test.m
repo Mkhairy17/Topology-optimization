@@ -1,11 +1,31 @@
 clc
 clear all
-Lx=input('length of x=');
-Ly=input('length of y=');
-nx=input('nx=');
-ny=input('ny=');
+Lx = input('length of x=');
+Ly = input('length of y=');
+nx = input('nx=');
+ny = input('ny=');
+a = Lx/nx; %elemeny width
+b = Ly/ny; %element height
 %global stiffness matrix
 K=global_matrix2(Lx,Ly,nx,ny);
-%convert from sparse matrix to full matrix
-% FullM=full(K);
+%%
+%Define force vector
+F = sparse(2*(ny+1)*(nx+1),1); 
+%Define displacement vector
+U = sparse(2*(ny+1)*(nx+1),1);
+%%
+% All degrees of freedom
+AllDOF = 1:2*(nx+1)*(ny+1);
+%Set Fixed degrees of freedom
+FixDOF = [1,2,3,4,5,6];
+%Set free degrees of freedom
+FreeDOF = setdiff(AllDOF,FixDOF);
+%%Define forces
+F(9,1)=-10;
+%%
+%Solve for U
+U(FreeDOF,:) = K(FreeDOF,FreeDOF) \ F(FreeDOF,:);
+U(FixDOF,:) = 0;
+[U_xx,V_yy,Gamaxy]=Calc_str(a,b,nx,ny,U)
+
 
