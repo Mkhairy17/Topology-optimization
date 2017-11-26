@@ -23,9 +23,9 @@ for ely = 1:ny
       v_y = N1_y*Ue(2)+N2_y*Ue(4)+N3_y*Ue(6)+N4_y*Ue(8);
       %gama_xy  is the shear strain
       gama_xy = (N1_y*Ue(1)+N2_y*Ue(3)+N3_y*Ue(5)+N4_y*Ue(7))+(N1_x*Ue(2)+N2_x*Ue(4)+N3_x*Ue(6)+N4_x*Ue(8));
-      U_xx(elx,ely)=u_x;
-      V_yy(elx,ely)=v_y;
-      Gamaxy(elx,ely)=gama_xy;
+      U_xx(ely,elx)=u_x;
+      V_yy(ely,elx)=v_y;
+      Gamaxy(ely,elx)=gama_xy;
     end
   
 end

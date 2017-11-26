@@ -21,7 +21,7 @@ FixDOF = [1,2,3,4,5,6];
 %Set free degrees of freedom
 FreeDOF = setdiff(AllDOF,FixDOF);
 %%Define forces
-F(9,1)=-10;
+F(9,1)=-1;
 %%
 %Solve for U
 U(FreeDOF,:) = K(FreeDOF,FreeDOF) \ F(FreeDOF,:);
