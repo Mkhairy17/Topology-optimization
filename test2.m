@@ -7,9 +7,9 @@ ny = input('ny=');
 a = Lx/nx; %elemeny width
 b = Ly/ny; %element height
 %global stiffness matrix
+rho_p=ones(ny,nx)*0.5;
 P=3;
-rho(1:ny*nx)=0.5;
-K=global_matrix2(Lx,Ly,nx,ny,P,rho);
+K=global_matrix2(Lx,Ly,nx,ny,P,rho_p);
 %%
 %Define force vector
 F = sparse(2*(ny+1)*(nx+1),1); 
@@ -37,6 +37,7 @@ ne=nx*ny;
 eita1=reshape(full(U_xx),ne,1);
 eita2=reshape(full(V_yy),ne,1);
 eita12=reshape(full(Gamaxy),ne,1);
+P=3;
 E=1;
 volfrac=0.5;
 rhos=0;
@@ -48,7 +49,7 @@ for ele=1:ne
   rho=(lmid/(P*E*(eita1(ele)^2+4*eita1(ele)*eita12(ele)+4*eita12(ele)^2+2*eita1(ele)*eita2(ele)+4*eita12(ele)*eita2(ele)+eita2(ele)^2)))^(1/(P-1));
   rhom(ele)= rho;
 end
-rhos=sum(rhom);
+rhos=sum(rhom)
 if rhos > volfrac*ne
     l2 = lmid;
 else
