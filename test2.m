@@ -8,8 +8,8 @@ a = Lx/nx; %elemeny width
 b = Ly/ny; %element height
 %global stiffness matrix
 P=3;
-rho(1:ny,1:nx)=0.5;
-K=global_matrix2(Lx,Ly,nx,ny,rho,p);
+rho(1:ny*nx)=0.5;
+K=global_matrix2(Lx,Ly,nx,ny,P,rho);
 %%
 %Define force vector
 F = sparse(2*(ny+1)*(nx+1),1); 
