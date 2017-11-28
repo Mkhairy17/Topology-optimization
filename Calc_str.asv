@@ -13,19 +13,20 @@ N2_y = -xe/(a*b);
 N3_y = xe/(a*b);
 N4_y = (1/b)-xe/(a*b);
 % Calculate the strains for each element 
+Be = 0.5*[-1/a 0 1/a 0 1/a 0 -1/a 0 ; 0 -1/b 0 -1/b 0 1/b 0 1/b;-1/b -1/a -1/b 1/a 1/b 1/a 1/b -1/a];
 for ely = 1:ny
     for elx = 1:nx
       n1 = (ny+1)*(elx-1)+ely;
       n2 = (ny+1)* elx +ely;
       Ue = U([2*n1-1;2*n1; 2*n2-1;2*n2; 2*n2+1;2*n2+2; 2*n1+1;2*n1+2],1);
       %u_x  is the normal strain in x direction, v_y is the normal strain in y direction 
-      u_x = N1_x*Ue(1)+N2_x*Ue(3)+N3_x*Ue(5)+N4_x*Ue(7);
-      v_y = N1_y*Ue(2)+N2_y*Ue(4)+N3_y*Ue(6)+N4_y*Ue(8);
+      u_x = N1_x*Ue(7)+N2_x*Ue(5)+N3_x*Ue(3)+N4_x*Ue(1);
+      v_y = N1_y*Ue(8)+N2_y*Ue(6)+N3_y*Ue(4)+N4_y*Ue(2);
       %gama_xy  is the shear strain
-      gama_xy = (N1_y*Ue(1)+N2_y*Ue(3)+N3_y*Ue(5)+N4_y*Ue(7))+(N1_x*Ue(2)+N2_x*Ue(4)+N3_x*Ue(6)+N4_x*Ue(8));
-      U_xx(ely,elx)=u_x;
-      V_yy(ely,elx)=v_y;
-      Gamaxy(ely,elx)=gama_xy;
+      gama_xy = (N1_y*Ue(7)+N2_y*Ue(5)+N3_y*Ue(3)+N4_y*Ue(1))+(N1_x*Ue(8)+N2_x*Ue(6)+N3_x*Ue(4)+N4_x*Ue(2));
+      U_xx(ely,elx) = u_x;
+      V_yy(ely,elx) = v_y;
+      Gamaxy(ely,elx) = gama_xy;
     end
   
 end
