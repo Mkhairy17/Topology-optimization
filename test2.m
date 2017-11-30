@@ -8,7 +8,8 @@ a = Lx/nx; %elemeny width
 b = Ly/ny; %element height
 %global stiffness matrix
 rho_p=ones(ny,nx)*0.5;
-P=3;
+rho_p=ones(ny,nx)*0.5;
+P=6;
 K=global_matrix2(Lx,Ly,nx,ny,P,rho_p);
 %%
 %Define force vector
@@ -37,7 +38,6 @@ ne=nx*ny;
 eita1=reshape(full(U_xx),ne,1);
 eita2=reshape(full(V_yy),ne,1);
 eita12=reshape(full(Gamaxy),ne,1);
-P=3;
 E=1;
 volfrac=0.5;
 rhos=0;
