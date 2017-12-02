@@ -16,6 +16,6 @@ for j = 1:ny
  n1 = (ny+1)*(i-1)+j;
  n2 = (ny+1)* i +j;
  edof = [2*n1-1; 2*n1; 2*n2-1; 2*n2; 2*n2+1;2*n2+2;2*n1+1; 2*n1+2];
- K(edof,edof) = K(edof,edof)+(rho(ny,nx))^P*KE;
+ K(edof,edof) = K(edof,edof)+KE;
     end
 end

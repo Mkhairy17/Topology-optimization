@@ -7,7 +7,7 @@ ny = input('ny=');
 a = Lx/nx; %elemeny width
 b = Ly/ny; %element height
 %global stiffness matrix
-K=global_matrix2(Lx,Ly,nx,ny);
+K=global_matrix3(Lx,Ly,nx,ny);
 %%
 %Define force vector
 F = sparse(2*(ny+1)*(nx+1),1); 

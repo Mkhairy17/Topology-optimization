@@ -1,0 +1,22 @@
+
+E=1;
+v=0.3;
+P=3;
+Cm = [E*(1-v)/((1+v)*(1-v^2)) v*E*(1-v)/((1+v)*(1-v^2)) 0;v*E*(1-v)/((1+v)*(1-v^2)) E*(1-v)/((1+v)*(1-v^2)) 0;0 0 E/(1+v)];
+zeta = 0.1;
+eta = 0.5;
+ne = size(strain,1);
+rho_2 = zeros(ne,1);
+for ie = 1:ne
+    Strain_energy=strain(ie,:)*Cm*strain(ie,:)';
+    b =  P*rho_1(ne)^(P-1)*Strain_energy/Lambda;
+    rho_target = b^eta*rho_1(ie);
+    rho_u = min([(1+zeta)*rho_target 1]);
+    rho_l = max([(1-zeta)*rho_target rho_min]);    
+    rho_2(ie) = max(min(rho_target,rho_u),rho_l);
+end
+
+volfrac = sum(rho_2)/ne;
+
+end
+
