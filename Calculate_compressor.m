@@ -1,39 +1,6 @@
-clc
-clear all
-
-function [PI_t,tau_t,eta]=Calc_compressot(R,gama,Cp,m_dot_U1,U2,Tt1,Pt1,A,w_loss_R,w_loss,S,ac_c,ac_S,sigma_R,sigma_S,beta_1p,beta_2p,alfa_1p,alfa_1p)
-%% Inputs
-%%
-R = 286;
-gama = 1.4;
-m_dot = 17.8;
-Cp=1000;
-%%
-alfa1 = 0;
-%%
-U1=238;
-U2=238;
-%%
-Tt1 = 290.55;
-Pt1 = 0.894e5;
-%%
-A=0.1723;
-A2=0.195;
-%%
-w_loss_R=0.03;
-w_loss_S=0.036;
-%% Rotor airfoil charactristics
-ac_c=0.1;
-sigma_R = 1;
-beta_1p=50;
-beta_2p=20;
+function [PI_t,tau_t,eta,M1]= Calculate_compressor(R,gama,Cp,m_dot,U1,U2,Tt1,Pt1,A,w_loss_R,w_loss_S,ac_c,ac_s,sigma_R,sigma_s,beta_1p,beta_2p,alfa_1p,alfa_2p,alfa1)
+%% Calculate camber angles
 theta_c = beta_1p - beta_2p;
-%% Stator airfoil charactristics
-ac_s=0.1;
-sigma_s = 1;
-theta_s = 20;
-alfa_1p=60;
-alfa_2p=40;
 theta_s = alfa_1p - alfa_2p;
 %% Calculations
 % Mass flow parameter equation
@@ -94,4 +61,4 @@ PI_s = P3/P1;    % Static pressure ratio
 tau_t = Tt3/Tt1;  %Total Temperature ratio
 tau_s = T3/T1;    %Static Temperature ratio
 eta = ((PI_t^((gama-1)/gama))-1)/(tau_t-1);  % Stage effeciency
-
+end

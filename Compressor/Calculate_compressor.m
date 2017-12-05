@@ -1,40 +1,10 @@
-clc
-clear all
-%% Inputs
-%%
-R = 286;
-gama = 1.4;
-m_dot = 32;
-Cp=1000;
-%%
-alfa1 = 38.94;
-%%
-U1=221;
-U2=221;
-%%
-Tt1 = 288;
-Pt1 = 1.01e5;
-%%
-A1=0.2;
-A2=0.195;
-%%
-w_loss_R=0.03;
-w_loss_S=0.036;
-%% Rotor airfoil charactristics
-ac_c=0.1;
-sigma_R = 1;
-theta_c = 30;
-beta_1p=50;
-beta_2p=20;
-%% Stator airfoil charactristics
-ac_s=0.1;
-sigma_s = 1;
-theta_s = 20;
-alfa_1p=60;
-alfa_2p=40;
+function [PI_t,tau_t,eta]= Calculate_compressor(R,gama,Cp,m_dot,U1,U2,Tt1,Pt1,A,w_loss_R,w_loss_S,ac_c,ac_s,sigma_R,sigma_s,beta_1p,beta_2p,alfa_1p,alfa_2p,alfa1)
+%% Calculate camber angles
+theta_c = beta_1p - beta_2p;
+theta_s = alfa_1p - alfa_2p;
 %% Calculations
 % Mass flow parameter equation
-Calculate_M = @(M) (m_dot*sqrt(Tt1))/(A1*Pt1*cosd(alfa1)) - sqrt(gama/R)*M*(1+M^2*(gama-1)/2)^-(gama+1)/(2*(gama-1));
+Calculate_M = @(M) (m_dot*sqrt(Tt1))/(A*Pt1*cosd(alfa1)) - sqrt(gama/R)*M*(1+M^2*(gama-1)/2)^-((gama+1)/(2*(gama-1)));
 M1 = fsolve (Calculate_M , 0.4);
 % Calculate  T1 and P1
 T1 = Tt1/(1+M1^2*gama*R/(2*Cp));
@@ -91,5 +61,4 @@ PI_s = P3/P1;    % Static pressure ratio
 tau_t = Tt3/Tt1;  %Total Temperature ratio
 tau_s = T3/T1;    %Static Temperature ratio
 eta = ((PI_t^((gama-1)/gama))-1)/(tau_t-1);  % Stage effeciency
-
-
+end

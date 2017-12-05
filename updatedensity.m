@@ -1,9 +1,9 @@
 function [volfrac,rho_2] = updatedensity(Lambda,rho_1,P,strain,rho_min)
 E=1;
 v=0.3;
-Cm = [E*(1-v)/((1+v)*(1-v^2)) v*E*(1-v)/((1+v)*(1-v^2)) 0;v*E*(1-v)/((1+v)*(1-v^2)) E*(1-v)/((1+v)*(1-v^2)) 0;0 0 E/(1+v)];
+Cm = (E/1-v^2)*[1 v 0;v 1 0;0 0 1-v];
 zeta = 0.1;
-eta = 0.5;
+eta = 1;
 ne = size(strain,1);
 rho_2 = zeros(ne,1);
 for ie = 1:ne

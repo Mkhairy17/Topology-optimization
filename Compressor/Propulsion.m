@@ -1,24 +1,22 @@
 clc
 clear all
 
-function [PI_t,tau_t,eta]=Calc_compressot(R,gama,Cp,m_dot_U1,U2,Tt1,Pt1,A,w_loss_R,w_loss,S,ac_c,ac_S,sigma_R,sigma_S,beta_1p,beta_2p,alfa_1p,alfa_1p)
 %% Inputs
 %%
 R = 286;
 gama = 1.4;
-m_dot = 17.8;
-Cp=1000;
+m_dot = 30;
+Cp=1005;
 %%
 alfa1 = 0;
 %%
-U1=238;
+U1=340;
 U2=238;
 %%
-Tt1 = 290.55;
-Pt1 = 0.894e5;
-%%
+Tt1 = 300;
+Pt1 = 1e5;
+%% Assuming constant area
 A=0.1723;
-A2=0.195;
 %%
 w_loss_R=0.03;
 w_loss_S=0.036;
@@ -94,4 +92,3 @@ PI_s = P3/P1;    % Static pressure ratio
 tau_t = Tt3/Tt1;  %Total Temperature ratio
 tau_s = T3/T1;    %Static Temperature ratio
 eta = ((PI_t^((gama-1)/gama))-1)/(tau_t-1);  % Stage effeciency
-
